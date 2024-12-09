@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is It Down Right Now?</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Is It Down Right Now?</h1>
+        <form action="/" method="post" class="d-flex justify-content-center mb-4">
+            <input type="text" name="url" class="form-control w-50 me-2" placeholder="Enter website URL" required>
+            <button type="submit" class="btn btn-primary">Check</button>
+        </form>
+
+        {% if status is not none %}
+            <div class="text-center mt-4">
+                <p><strong>Website:</strong> {{ url }}</p>
+                {% if status == 'Up' %}
+                    <p class="text-success"><strong>Status:</strong> {{ status }}</p>
+                    <p><strong>Response Time:</strong> {{ response_time }} ms</p>
+                    <p><strong>Status Code:</strong> {{ status_code }}</p>
+                {% elif status == 'Issues' %}
+                    <p class="text-warning"><strong>Status:</strong> {{ status }}</p>
+                    <p><strong>Status Code:</strong> {{ status_code }}</p>
+                {% else %}
+                    <p class="text-danger"><strong>Status:</strong> {{ status }}</p>
+                    <p><strong>Error:</strong> {{ error }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
